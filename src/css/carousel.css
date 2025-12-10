@@ -1,0 +1,5 @@
+.carousel-inner .carousel-item {
+  transition: -webkit-transform 3s ease;
+  transition: transform 3s ease;
+  transition: transform 3s ease, -webkit-transform 3s ease;
+}

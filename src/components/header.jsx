@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Container, Col, Row, Image } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import harpIcon from '../assets/harp-icon.svg'
+import harpIcon from '../assets/logos/harp-icon.svg'
 
 function Header() {
   const [page, setPage] = useState('home')
