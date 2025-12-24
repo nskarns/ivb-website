@@ -9,9 +9,7 @@ function Home() {
   return (
     <Container className='justify-content-center'>
       <Bar />
-      <Col
-        className='home-container w-75 flex-column rounded-3 p-3 mx-auto'
-      >
+      <Col className='home-container w-75 flex-column rounded-3 p-3 mx-auto'>
         <h2 className='fw-bold home-header home-text'>
           Rich History
         </h2>
