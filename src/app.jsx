@@ -8,7 +8,7 @@ function App() {
   const [page, setPage] = useState('home')
 
   return (
-    <Container fluid className='p-0'>
+    <Container fluid className='p-0 m-0'>
       <Header />
       <Carousel />
     </Container>
