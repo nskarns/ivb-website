@@ -10,7 +10,7 @@ function Home() {
     <Container className='justify-content-center'>
       <Bar />
       <Col
-        className="home-container w-75 flex-column rounded-3 p-3 mx-auto"
+        className='home-container w-75 flex-column rounded-3 p-3 mx-auto'
       >
         <h2 className='fw-bold home-header home-text'>
           Rich History
@@ -37,8 +37,8 @@ function Home() {
         <h1 className='join-header fw-bold home-text mt-3'>
           Ready To Join The IVB?
         </h1>
-        <div class="ratio ratio-16x9 border border-dark border-4 rounded-3 mt-3">
-          <iframe className='rounded-1' src="https://www.youtube.com/embed/3npS62MvtWI?rel=0" title="IVB Video" allowfullscreen></iframe>
+        <div class='ratio ratio-16x9 border border-dark border-4 rounded-3 mt-3'>
+          <iframe className='rounded-1' src='https://www.youtube.com/embed/3npS62MvtWI?rel=0' title='IVB Video' allowfullscreen></iframe>
         </div>
       <Bar />
       <p className='home-description home-text mb-3'>
