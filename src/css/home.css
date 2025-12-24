@@ -1,0 +1,24 @@
+.home-container { 
+    background-color: rgba(98, 98, 98, 0.8);
+    border: rgba(246, 202, 202, 0.5);
+    max-height: 75%;
+}
+
+.home-text {
+    font-family: 'League Spartan', sans-serif;
+    text-shadow: 0 4px 4px rgba(0, 0, 0, 0.5); 
+    color: #E8E8E8;
+    text-align: center;
+}
+
+.home-header {
+  font-size: clamp(16px, 1.8vw, 100px);
+}
+
+.home-description {
+  font-size: clamp(13px, 1.2vw, 60px);
+}
+
+.join-header {
+  font-size: clamp(16px, 2.1vw, 110px);
+}
