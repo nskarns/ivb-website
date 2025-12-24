@@ -2,15 +2,15 @@
   transition: -webkit-transform 3s ease;
   transition: transform 3s ease;
   transition: transform 3s ease, -webkit-transform 3s ease;
-}
-
-.carousel {
-  min-height: 40vh;
+  min-height: 50vh;
 }
 
 .scroll-image {
   width: 100%;
-  min-height: 40vh;
+  height: 100%;
+  min-height: inherit;
+  object-fit: cover;
+  object-position: center;
 }
 
 .carousel-container { 

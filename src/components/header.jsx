@@ -26,7 +26,7 @@ function Header() {
             <span className="align-content-center header-text fs-5">Structure</span>
             <span className="align-content-center header-text fs-5">Gallery</span>
           </div>
-          <div className="d-flex flex-column flex-sm-row justify-content-evenly gap-3 gap-sm-3">
+          <div className="d-flex flex-row justify-content-evenly gap-3 gap-sm-3">
             <Link to="https://discord.com/invite/ivb">
               <Image className="link-icon" src={discordIcon} alt="Discord Link" />
             </Link>

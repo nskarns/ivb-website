@@ -21,7 +21,7 @@ function Carousel() {
     }, [])
 
   return (
-    <Container fluid className='carousel border-top border-bottom border-dark border-4 mt-2 p-0'>
+    <Container fluid className='border-top border-bottom border-dark border-4 mt-2 p-0'>
       <div id='demo' className='carousel slide' data-bs-ride='carousel' data-bs-interval='5000' >
         <Col
           className="carousel-container position-absolute top-50 start-50 translate-middle
