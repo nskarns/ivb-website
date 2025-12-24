@@ -7,16 +7,29 @@
   background-position: top left;
 }
 
+#root::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("../assets/background.gif");
+  background-size: contain;
+  background-position: center;
+  filter: blur(5px);          
+  transform: scaleY(2.5);
+  z-index: -1;            
+}
+
 #root {
-  background-color: white;
+  position: relative;
   display: flex;
+  overflow: hidden;
   max-width: 1920px;
   min-height: 100vh;
   justify-content: center;
   margin: 0px;
   padding: 0px;
-  border: red;
-  border-width: 10px;
+  border-left: 4px solid black;
+  border-right: 4px solid black;
 }
 
 @media (min-width: 1921px) {

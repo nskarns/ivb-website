@@ -9,7 +9,7 @@ function Header() {
   const [page, setPage] = useState('home')
 
     return (
-    <Container fluid className="header-container rounded-5 mt-3 w-75">
+    <Container fluid className="header-container rounded-5 mt-2 w-75">
       <Row className="d-flex flex-lg-row flex-column align-items-center py-3 gx-2">
         <Col className="d-flex col-12 col-lg-5 justify-content-center justify-content-lg-start align-items-center gap-0 m-0">
           <Link to="/">
