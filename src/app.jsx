@@ -11,6 +11,7 @@ function App() {
     <Container fluid className='p-0 m-0'>
       <Header />
       <Carousel />
+      <Home />
     </Container>
   )
 }
