@@ -1,6 +1,6 @@
 // Gallery.jsx
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Container, Row, Col, Image, Button } from "react-bootstrap";
+import { Container, Row, Col, Image, Button, Spinner } from "react-bootstrap";
 import SpacerBar from "../spacerBar";
 import Credit from "../credit";
 
@@ -47,15 +47,31 @@ function LazyImage16x9({ src, alt, onClick }) {
     return () => io.disconnect();
   }, []);
 
+  const showSpinner = shouldLoad && !loaded && !failed;
+
   return (
     <div ref={ref} className="ratio ratio-16x9" style={{ position: "relative" }}>
-      {!loaded && !failed && (
+      {/* Background placeholder */}
+      <div
+        className="w-100 h-100 border border-4 border-dark rounded"
+        style={{ background: "rgba(0,0,0,0.08)" }}
+      />
+
+      {/* Spinner overlay while loading */}
+      {showSpinner && (
         <div
-          className="w-100 h-100 border border-4 border-dark rounded"
-          style={{ background: "rgba(0,0,0,0.08)" }}
-        />
+          className="d-flex align-items-center justify-content-center"
+          style={{
+            position: "absolute",
+            inset: 0,
+            zIndex: 2,
+          }}
+        >
+          <Spinner animation="border" role="status" />
+        </div>
       )}
 
+      {/* Image */}
       {shouldLoad && !failed && (
         <Image
           src={src}
@@ -71,12 +87,14 @@ function LazyImage16x9({ src, alt, onClick }) {
             objectFit: "cover",
             position: "absolute",
             inset: 0,
+            zIndex: 1,
             opacity: loaded ? 1 : 0,
             transition: "opacity 160ms ease",
           }}
         />
       )}
 
+      {/* Error */}
       {failed && (
         <div className="w-100 h-100 border border-4 border-dark rounded d-flex align-items-center justify-content-center">
           <span>Image failed to load</span>
@@ -85,6 +103,7 @@ function LazyImage16x9({ src, alt, onClick }) {
     </div>
   );
 }
+
 
 /**
  * Grab the first frame of a video and return it as a dataURL poster.
@@ -166,15 +185,19 @@ function getVideoFirstFramePoster(videoSrc, seekTo = 0.01) {
  * Video tile (no <video> in grid). Uses extracted poster if available.
  */
 function VideoTile16x9({ posterSrc, onClick }) {
+  const isLoading = !posterSrc;
+
   return (
     <div
       role="button"
       tabIndex={0}
-      onClick={onClick}
-      onKeyDown={(e) => (e.key === "Enter" || e.key === " " ? onClick?.() : null)}
+      onClick={!isLoading ? onClick : undefined}
+      onKeyDown={(e) =>
+        !isLoading && (e.key === "Enter" || e.key === " ") ? onClick?.() : null
+      }
       className="ratio ratio-16x9 border border-4 border-dark rounded"
       style={{
-        cursor: "pointer",
+        cursor: isLoading ? "default" : "pointer",
         position: "relative",
         backgroundColor: "rgba(0,0,0,0.08)",
         backgroundImage: posterSrc ? `url(${posterSrc})` : "none",
@@ -183,42 +206,50 @@ function VideoTile16x9({ posterSrc, onClick }) {
         overflow: "hidden",
       }}
     >
-      {/* If no poster yet, show a subtle placeholder */}
-      {!posterSrc && (
+      {/* Spinner while poster is loading */}
+      {isLoading && (
+        <div
+          className="d-flex align-items-center justify-content-center"
+          style={{
+            position: "absolute",
+            inset: 0,
+            zIndex: 2,
+          }}
+        >
+          <Spinner animation="border" role="status"  />
+        </div>
+      )}
+
+      {/* Play overlay — ONLY when poster is ready */}
+      {!isLoading && (
         <div
           style={{
             position: "absolute",
             inset: 0,
-            background: "rgba(0,0,0,0.08)",
-          }}
-        />
-      )}
-
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          background: posterSrc ? "rgba(0,0,0,0.12)" : "rgba(0,0,0,0.05)",
-        }}
-      >
-        <span
-          style={{
-            padding: "6px 10px",
-            borderRadius: 8,
-            background: "rgba(0,0,0,0.7)",
-            color: "white",
-            fontWeight: 700,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            background: "rgba(0,0,0,0.12)",
+            zIndex: 3,
           }}
         >
-          ▶ Play
-        </span>
-      </div>
+          <span
+            style={{
+              padding: "6px 10px",
+              borderRadius: 8,
+              background: "rgba(0,0,0,0.7)",
+              color: "white",
+              fontWeight: 700,
+            }}
+          >
+            ▶ Play
+          </span>
+        </div>
+      )}
     </div>
   );
 }
+
 
 export default function Gallery() {
   const mediaFiles = useMemo(
@@ -393,7 +424,7 @@ export default function Gallery() {
                   {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
                     <Button
                       key={p}
-                      variant={p === currentPage ? "primary" : "outline-primary"}
+                      variant={p === currentPage ? "light" : "dark"}
                       onClick={() => setCurrentPage(p)}
                       disabled={p === currentPage}
                     >
@@ -463,7 +494,6 @@ export default function Gallery() {
               </div>
             </div>
           )}
-
           <SpacerBar />
           <Credit />
         </Container>
