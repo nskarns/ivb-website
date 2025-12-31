@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Container, Col, Row, Image } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Bar from '../bar'
+import Credit from '../credit'
 
 function Home() {
   const [page, setPage] = useState('home')
@@ -39,9 +40,7 @@ function Home() {
           <iframe className='rounded-1' src='https://www.youtube.com/embed/3npS62MvtWI?rel=0' title='IVB Video' allowfullscreen></iframe>
         </div>
       <Bar />
-      <p className='home-description home-text mb-3'>
-        @2025 - Irish Volunteer Brigade
-      </p>
+      <Credit />
     </Container>
   )
 }

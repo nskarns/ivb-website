@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Container, Col, Row, Image } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Bar from '../bar'
+import Credit from '../credit'
 
 const formatLocalTime = (hour, minute = 0, timeZone = 'America/New_York') => {
   const date = new Date(
@@ -90,9 +91,7 @@ function Schedule() {
           </Row>
         </Col>
       <Bar />
-      <p className='schedule-description home-text mb-3'>
-        @2025 - Irish Volunteer Brigade
-      </p>
+      <Credit />
     </Container>
   )
 }
