@@ -226,7 +226,6 @@ export default function Gallery() {
       ivbPhotoOne,
       ivbPhotoTwo,
       ivbVideoOne,
-      ivbVideoTwo,
       ivbPhotoThree,
       ivbPhotoFour,
       ivbPhotoFive,
@@ -236,6 +235,7 @@ export default function Gallery() {
       ivbPhotoNine,
       ivbPhotoTen,
       ivbPhotoEleven,
+      ivbVideoTwo,
     ],
     []
   );
@@ -257,7 +257,7 @@ export default function Gallery() {
     return () => window.removeEventListener("resize", onResize);
   }, []);
 
-  const itemsPerPage = isMobile ? 6 : 9;
+  const itemsPerPage = 6;
 
   const totalPages = Math.max(1, Math.ceil(mediaFiles.length / itemsPerPage));
 
