@@ -11,6 +11,8 @@ export default function OnlineMembers({ members }) {
   const [error, setError] = useState(null);
   const [showOfficers, setShowOfficers] = useState([true]);
   const [showNCOs, setShowNCOs] = useState([true]);
+  const transparentPixel =
+  "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=";
 
   if (!members.length) {
     return <p>No members online</p>;
@@ -218,37 +220,80 @@ export default function OnlineMembers({ members }) {
     <Container fluid>
       <Col className='d-flex flex-column flex-lg-row justify-content-center gap-3'>
         <Row className='gap-2 px-3'>
-          <Button 
-            type='button' 
-            key={0} 
-            onClick={() => setActiveCompanyId(0)} 
-            className={`btn btn-border-3 btn-success px-3 ${activeCompanyId === 0} ? 'active' : ''`}
-            aria-pressed={activeCompanyId === 0}>
-            HQ
-          </Button>
-          <Button key={1} onClick={() => setActiveCompanyId(1)} className='btn btn-border-3 btn-success px-3'>
-            Company A
-          </Button>
-          <Button key={2} onClick={() => setActiveCompanyId(2)} className='btn btn-border-3 btn-success px-3'>
-            Company B
-          </Button>
-          <Button key={3} onClick={() => setActiveCompanyId(3)} className='btn btn-border-3 btn-success px-3'>
-            Company C
-          </Button>
+          <Button
+              key={0} 
+              onClick={() => setActiveCompanyId(0)} 
+              className={`btn btn-border-3 btn-success px-3 ${
+                activeCompanyId === 0? "fw-bold" : ""
+              }`}
+            >
+              HQ
+          </Button>  
+          <Button
+              key={1} 
+              onClick={() => setActiveCompanyId(1)} 
+              className={`btn btn-border-3 btn-success px-3 ${
+                activeCompanyId === 1? "fw-bold" : ""
+              }`}
+            >
+              Company A
+          </Button> 
+          <Button
+              key={2} 
+              onClick={() => setActiveCompanyId(2)} 
+              className={`btn btn-border-3 btn-success px-3 ${
+                activeCompanyId === 2? "fw-bold" : ""
+              }`}
+            >
+              Company B
+          </Button> 
+          <Button
+              key={3} 
+              onClick={() => setActiveCompanyId(3)} 
+              className={`btn btn-border-3 btn-success px-3 ${
+                activeCompanyId === 3? "fw-bold" : ""
+              }`}
+            >
+              Company C
+          </Button> 
         </Row>
         <Row className='gap-2 px-3'>
-          <Button key={4} onClick={() => setActiveCompanyId(4)} className='btn btn-border-3 btn-success px-3'>
-            Company D
-          </Button>
-          <Button key={5} onClick={() => setActiveCompanyId(5)} className='btn btn-border-3 btn-success px-3'>
-            Company I
-          </Button>
-          <Button key={6} onClick={() => setActiveCompanyId(6)} className='btn btn-border-3 btn-success px-3'>
-            Company K
-          </Button>
-          <Button key={7} onClick={() => setActiveCompanyId(7)} className='btn btn-border-3 btn-success px-3'>
-            Artillery
-          </Button>
+          <Button
+              key={4} 
+              onClick={() => setActiveCompanyId(4)} 
+              className={`btn btn-border-3 btn-success px-3 ${
+                activeCompanyId === 4? "fw-bold" : ""
+              }`}
+            >
+              Company D
+          </Button> 
+          <Button
+              key={5} 
+              onClick={() => setActiveCompanyId(5)} 
+              className={`btn btn-border-3 btn-success px-3 ${
+                activeCompanyId === 5? "fw-bold" : ""
+              }`}
+            >
+              Company I
+          </Button> 
+          <Button
+              key={6} 
+              onClick={() => setActiveCompanyId(6)} 
+              className={`btn btn-border-3 btn-success px-3 ${
+                activeCompanyId === 6? "fw-bold" : ""
+              }`}
+            >
+              Company K
+          </Button> 
+          <Button
+              key={7} 
+              onClick={() => setActiveCompanyId(7)} 
+              className={`btn btn-border-3 btn-success px-3 ${
+                activeCompanyId === 7? "fw-bold" : ""
+              }`}
+            >
+              Artillery
+          </Button> 
         </Row>
       </Col>
       <SpacerBar />
@@ -282,7 +327,7 @@ export default function OnlineMembers({ members }) {
                         <div className="position-relative">
                           <img
                             src={`${m.avatar}?size=64`}
-                            alt={`${m.name}'s avatar`}
+                            alt=''
                             className="border border-dark border-2"
                             width={50}
                             height={50}
@@ -293,7 +338,8 @@ export default function OnlineMembers({ members }) {
                               backgroundColor: "#2c3a2c",
                             }}
                             onError={(e) => {
-                              e.currentTarget.src = "/default-avatar.png";
+                              e.currentTarget.onerror = null;
+                              e.currentTarget.src = transparentPixel;
                             }}
                           />
                         </div>
@@ -344,7 +390,7 @@ export default function OnlineMembers({ members }) {
                         <div className="position-relative">
                           <img
                             src={`${m.avatar}?size=64`}
-                            alt={`${m.name}'s avatar`}
+                            alt=''
                             className="border border-dark border-2"
                             width={50}
                             height={50}
@@ -355,9 +401,10 @@ export default function OnlineMembers({ members }) {
                               backgroundColor: "#2c3a2c",
                             }}
                             onError={(e) => {
-                              e.currentTarget.src = "/default-avatar.png";
-                            }}
-                          />
+                              e.currentTarget.onerror = null;
+                              e.currentTarget.src = transparentPixel;
+                            }}                          
+                        />
                         </div>
                         <span
                           className='ms-2'
@@ -415,7 +462,8 @@ export default function OnlineMembers({ members }) {
                           backgroundColor: "#2c3a2c",
                         }}
                         onError={(e) => {
-                          e.currentTarget.src = "/default-avatar.png";
+                          e.currentTarget.onerror = null;
+                          e.currentTarget.src = transparentPixel;
                         }}
                       />
                       <span
