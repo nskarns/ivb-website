@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Container, Col } from 'react-bootstrap';
 import SpacerBar from '../spacerBar';
 import Credit from '../credit';
@@ -6,6 +6,11 @@ import Credit from '../credit';
 function Home() {
   const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
+  const [loading, setLoading] = useState(true);
+  const [members, setMembers] = useState([]);
+  const [activeCompanyId, setActiveCompanyId] = useState(0);
+  const [error, setError] = useState("");
+  
   async function runDiscordBot() {
     const res = await fetch("/api/run_discord_bot", { method: "POST" });
     if (!res.ok) throw new Error(`api/run_discord_bot failed: ${res.status}`);
