@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { Container, Col, Row, Image } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
 import SpacerBar from '../spacerBar'
 import Credit from '../credit'
 
@@ -20,8 +19,6 @@ const formatLocalTime = (hour, minute = 0, timeZone = 'America/New_York') => {
 
 
 function Schedule() {
-  const [page, setPage] = useState('home')
-
   // Sunday
   const historicalRulesEvent = formatLocalTime(14);
   const regimentalTrainingEvent = formatLocalTime(19);

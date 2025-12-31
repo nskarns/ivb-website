@@ -13,7 +13,7 @@ function App() {
 
   return (
     <Container fluid className='p-0 m-0'>
-      <Header setPage={setPage} />
+      <Header page={page} setPage={setPage} />
       <Carousel />
       { page == 'home' ?
           <Home />

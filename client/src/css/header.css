@@ -19,3 +19,7 @@
     color: #E3E3E3;
     text-decoration: none;
 }
+
+.header-text:active {
+  transform: scale(0.96);
+}

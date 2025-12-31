@@ -1,34 +1,16 @@
-import { useState } from 'react'
-import { Container, Col, Row, Image } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { useEffect } from "react";
+import { Container, Col } from 'react-bootstrap';
 import SpacerBar from '../spacerBar';
 import Credit from '../credit';
-import React, { useEffect, useMemo, } from "react";
-
 
 function Home() {
-  const [page, setPage] = useState('home')
-
   const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
-
-
-
-
-
-
-  const [loading, setLoading] = useState(true);
-  const [members, setMembers] = useState([]);
-  const [activeCompanyId, setActiveCompanyId] = useState(0);
-  const [error, setError] = useState("");
-
-  // 1) tells backend to refresh members
   async function runDiscordBot() {
     const res = await fetch("/api/run_discord_bot", { method: "POST" });
     if (!res.ok) throw new Error(`api/run_discord_bot failed: ${res.status}`);
   }
 
-  // 2) polls backend until members are available
   async function fetchMembersUntilReady({ timeoutMs = 20000, intervalMs = 2000 } = {}) {
     const start = Date.now();
 
@@ -43,7 +25,7 @@ function Home() {
       await sleep(intervalMs);
     }
 
-    return []; // timed out, treat as “no members”
+    return []; 
   }
 
   async function refresh() {
@@ -63,9 +45,7 @@ function Home() {
   // initial load
   useEffect(() => {
     refresh();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
 
   return (
     <Container className='justify-content-center'>
