@@ -310,13 +310,19 @@ export default function OnlineMembers() {
                       >
                         <div className="position-relative">
                           <img
-                            src={m.avatar}
+                            src={`${m.avatar}?size=64`}
                             alt={`${m.name}'s avatar`}
-                            className='border border-dark border-2'
+                            className="border border-dark border-2"
+                            width={50}
+                            height={50}
+                            loading="lazy"
+                            decoding="async"
                             style={{
-                              width: 50,
-                              height: 50,
                               borderRadius: "50%",
+                              backgroundColor: "#2c3a2c",
+                            }}
+                            onError={(e) => {
+                              e.currentTarget.src = "/default-avatar.png";
                             }}
                           />
                         </div>
@@ -376,13 +382,19 @@ export default function OnlineMembers() {
                       >
                         <div className="position-relative">
                           <img
-                            src={m.avatar}
+                            src={`${m.avatar}?size=64`}
                             alt={`${m.name}'s avatar`}
-                            className='border border-dark border-2'
+                            className="border border-dark border-2"
+                            width={50}
+                            height={50}
+                            loading="lazy"
+                            decoding="async"
                             style={{
-                              width: 50,
-                              height: 50,
                               borderRadius: "50%",
+                              backgroundColor: "#2c3a2c",
+                            }}
+                            onError={(e) => {
+                              e.currentTarget.src = "/default-avatar.png";
                             }}
                           />
                         </div>
@@ -438,15 +450,21 @@ export default function OnlineMembers() {
                     key={m.id}
                     className="d-flex flex-row align-items-center justify-content-center mb-3"
                   >
-                    <div style={{ position: "relative" }}>
+                    <div className="position-relative">
                       <img
-                        src={m.avatar || DiscordLogo}
+                        src={`${m.avatar}?size=64`}
                         alt={`${m.name}'s avatar`}
-                        className='border border-2 border-dark'
+                        className="border border-dark border-2"
+                        width={50}
+                        height={50}
+                        loading="lazy"
+                        decoding="async"
                         style={{
-                          width: 50,
-                          height: 50,
                           borderRadius: "50%",
+                          backgroundColor: "#2c3a2c",
+                        }}
+                        onError={(e) => {
+                          e.currentTarget.src = "/default-avatar.png";
                         }}
                       />
                       <span
