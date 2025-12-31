@@ -13,22 +13,30 @@ function App() {
   const [members, setMembers] = useState([]);
   const [membersLoaded, setMembersLoaded] = useState(false);
 
-  useEffect(() => {
-    if (membersLoaded) return;
+    useEffect(() => {
+      const initMembers = async () => {
+        try {
+          await fetch("/api/run_discord_bot", {
+            method: "POST",
+          });
 
-    const loadMembers = async () => {
-      try {
-        const res = await fetch("/api/get_members");
-        const data = await res.json();
-        setMembers(data.members || []);
-        setMembersLoaded(true);
-      } catch (err) {
-        console.error("Failed to load members", err);
+          await new Promise((r) => setTimeout(r, 1000));
+
+          const res = await fetch("/api/get_members");
+          const data = await res.json();
+
+          setMembers(data.members || []);
+          setMembersLoaded(true);
+        } catch (err) {
+          console.error("Failed to load members", err);
+        }
+      };
+
+      if (!membersLoaded) {
+        initMembers();
       }
-    };
 
-    loadMembers();
-  }, [membersLoaded]);
+    }, [membersLoaded]);
 
   return (
     <Container fluid className='p-0 m-0'>
