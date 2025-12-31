@@ -1,15 +1,75 @@
 import { useState } from 'react'
 import { Container, Col, Row, Image } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import Bar from '../bar'
-import Credit from '../credit'
+import SpacerBar from '../spacerBar';
+import Credit from '../credit';
+import React, { useEffect, useMemo, } from "react";
+
 
 function Home() {
   const [page, setPage] = useState('home')
 
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+
+
+
+
+
+
+  const [loading, setLoading] = useState(true);
+  const [members, setMembers] = useState([]);
+  const [activeCompanyId, setActiveCompanyId] = useState(0);
+  const [error, setError] = useState("");
+
+  // 1) tells backend to refresh members
+  async function runDiscordBot() {
+    const res = await fetch("/api/run_discord_bot", { method: "POST" });
+    if (!res.ok) throw new Error(`api/run_discord_bot failed: ${res.status}`);
+  }
+
+  // 2) polls backend until members are available
+  async function fetchMembersUntilReady({ timeoutMs = 20000, intervalMs = 2000 } = {}) {
+    const start = Date.now();
+
+    while (Date.now() - start < timeoutMs) {
+      const res = await fetch("/api/get_members");
+      if (!res.ok) throw new Error(`api/get_members failed: ${res.status} ${res.error}`);
+      const data = await res.json();
+
+      const arr = Array.isArray(data?.members) ? data.members : [];
+      if (arr.length > 0) return arr;
+
+      await sleep(intervalMs);
+    }
+
+    return []; // timed out, treat as “no members”
+  }
+
+  async function refresh() {
+    setError("");
+    setLoading(true);
+    try {
+      await runDiscordBot();
+      const arr = await fetchMembersUntilReady();
+      setMembers(arr);
+    } catch (e) {
+      setError(e?.message || "Unknown error");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  // initial load
+  useEffect(() => {
+    refresh();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+
   return (
     <Container className='justify-content-center'>
-      <Bar />
+      <SpacerBar />
       <Col className='home-container w-75 flex-column rounded-3 p-3 mx-auto'>
         <h2 className='fw-bold home-header home-text'>
           Rich History
@@ -32,14 +92,14 @@ function Home() {
           We are always looking for people to move up the ranks!
         </p>
       </Col>
-      <Bar />
+      <SpacerBar />
         <h1 className='join-header fw-bold home-text mt-3'>
           Ready To Join The IVB?
         </h1>
-        <div class='ratio ratio-16x9 border border-dark border-4 rounded-3 mt-3'>
-          <iframe className='rounded-1' src='https://www.youtube.com/embed/3npS62MvtWI?rel=0' title='IVB Video' allowfullscreen></iframe>
+        <div className='ratio ratio-16x9 border border-dark border-4 rounded-3 mt-3'>
+          <iframe className='rounded-1' src='https://www.youtube.com/embed/3npS62MvtWI?rel=0' title='IVB Video' allowFullScreen></iframe>
         </div>
-      <Bar />
+      <SpacerBar />
       <Credit />
     </Container>
   )

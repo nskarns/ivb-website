@@ -6,6 +6,7 @@ import './css/root.css'
 import './css/header.css'
 import './css/carousel.css'
 import './css/home.css'
+import './css/structure.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 

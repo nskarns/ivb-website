@@ -1,0 +1,12 @@
+.bg-success-dark {
+    background-color: #294D2A; 
+}
+
+.border-success-dark {
+  --bs-border-color: #182F1A;
+}
+
+.hr-success-dark {
+  color: #182F1A;             
+  border-color: #182F1A;       
+}

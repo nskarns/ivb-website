@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Container, Col, Row, Image } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import Bar from '../bar'
+import SpacerBar from '../spacerBar'
 import Credit from '../credit'
 
 const formatLocalTime = (hour, minute = 0, timeZone = 'America/New_York') => {
@@ -43,7 +43,7 @@ function Schedule() {
 
   return (
     <Container className='justify-content-center'>
-      <Bar />
+      <SpacerBar />
         <Col className='home-container d-flex flex-column rounded-3 p-3 w-75 mx-auto gap-4'>
           <Row>
             <h2 className='fw-bold home-header home-text mb-3'>
@@ -90,7 +90,7 @@ function Schedule() {
             </p>
           </Row>
         </Col>
-      <Bar />
+      <SpacerBar />
       <Credit />
     </Container>
   )
