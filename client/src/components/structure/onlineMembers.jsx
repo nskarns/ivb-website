@@ -13,10 +13,6 @@ export default function OnlineMembers({ members }) {
   const [showNCOs, setShowNCOs] = useState([true]);
   const transparentPixel =
   "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=";
-
-  if (!members.length) {
-    return <p>No members online</p>;
-  }
   
   // Determine Which Company Is Being Shown
   function filterMembersByCompany(members, activeCompanyId) {
@@ -214,6 +210,10 @@ export default function OnlineMembers({ members }) {
         return "gray";
     }
   };
+
+  if (!members.length) {
+    return <p>No members online</p>;
+  }
 
   // Component Return
   return (
