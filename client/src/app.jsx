@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Container } from 'react-bootstrap';
 import Header from './components/header';
 import Carousel from './components/carousel'
@@ -10,6 +10,25 @@ import Gallery from './components/gallery/gallery';
 function App() {
   const [page, setPage] = useState('home')
 
+  const [members, setMembers] = useState([]);
+  const [membersLoaded, setMembersLoaded] = useState(false);
+
+  useEffect(() => {
+    if (membersLoaded) return;
+
+    const loadMembers = async () => {
+      try {
+        const res = await fetch("/api/get_members");
+        const data = await res.json();
+        setMembers(data.members || []);
+        setMembersLoaded(true);
+      } catch (err) {
+        console.error("Failed to load members", err);
+      }
+    };
+
+    loadMembers();
+  }, [membersLoaded]);
 
   return (
     <Container fluid className='p-0 m-0'>
@@ -22,7 +41,7 @@ function App() {
           <Schedule />
         :
         page == 'structure' ?
-          <Structure />
+          <Structure  members={members} />
         :
           <Gallery />
       }

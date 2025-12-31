@@ -4,12 +4,12 @@ import SpacerBar from '../spacerBar'
 import Credit from '../credit'
 import OnlineMembers from './onlineMembers';
 
-function Structure() {
+function Structure({ members }) {
   return (
     <Container className='justify-content-center'>
       <SpacerBar />
       <Col>
-        <OnlineMembers/>
+        <OnlineMembers members={members}/>
       </Col>
       <SpacerBar />
       <Credit />

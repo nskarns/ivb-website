@@ -5,37 +5,17 @@ import SpacerBar from '../spacerBar';
 import DiscordLogo from '../../assets/logos/discord.svg';
 
 
-export default function OnlineMembers() {
+export default function OnlineMembers({ members }) {
   const [activeCompanyId, setActiveCompanyId] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [members, setMembers] = useState([]);
   const [showOfficers, setShowOfficers] = useState([true]);
   const [showNCOs, setShowNCOs] = useState([true]);
+
+  if (!members.length) {
+    return <p>No members online</p>;
+  }
   
-  
-  // Grabbing Online M embers
-  useEffect(() => {
-    const loadMembers = async () => {
-      try {
-        setLoading(true);
-        setError(null);
-
-        const res = await fetch("/api/get_members");
-        if (!res.ok) throw new Error("Failed to fetch members");
-
-        const data = await res.json();
-        setMembers(data.members || []); 
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadMembers();
-  }, []);
-
   // Determine Which Company Is Being Shown
   function filterMembersByCompany(members, activeCompanyId) {
     if (activeCompanyId == null) return members;
@@ -282,15 +262,6 @@ export default function OnlineMembers() {
               </Col>
             </Row>
             <Row className='bg-secondary rounded border border-3 border-dark'>
-              {loading && <span id="loading-indicator">Loading…</span>}
-
-              {!loading && error && (
-                <div style={{ color: "tomato", marginBottom: 10 }}>
-                  {error}
-                </div>
-              )}
-
-              {!loading && !error && (
                 <div id="discord-bot-output">
                   {officerMembers.length === 0 ? (
                     <div
@@ -342,7 +313,6 @@ export default function OnlineMembers() {
                     ))
                   )}
                 </div>
-              )}
             </Row>
             </>
           )}
@@ -354,15 +324,6 @@ export default function OnlineMembers() {
                 </Col>
               </Row>
               <Row className='bg-secondary rounded border border-3 border-dark'>
-                {loading && <span id="loading-indicator">Loading…</span>}
-
-                {!loading && error && (
-                  <div style={{ color: "tomato", marginBottom: 10 }}>
-                    {error}
-                  </div>
-                )}
-
-                {!loading && !error && (
                 <div id="discord-bot-output">
                   {ncoMembers.length === 0 ? (
                     <div
@@ -414,7 +375,6 @@ export default function OnlineMembers() {
                     ))
                   )}
                 </div>
-                )}
               </Row>
             </>
           )}
@@ -424,15 +384,6 @@ export default function OnlineMembers() {
             Online Members
           </Row>
           <OnlineBar />
-          {loading && <span id="loading-indicator">Loading…</span>}
-
-          {!loading && error && (
-            <div style={{ color: "tomato", marginBottom: 10 }}>
-              {error}
-            </div>
-          )}
-
-          {!loading && !error && (
             <div id="discord-bot-output">
               {visibleMembers.length === 0 ? (
                 <div
@@ -496,7 +447,6 @@ export default function OnlineMembers() {
                 ))
               )}
             </div>
-          )}
         </Col>
       </Container>
     </Container>

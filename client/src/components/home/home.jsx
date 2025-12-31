@@ -4,53 +4,6 @@ import SpacerBar from '../spacerBar';
 import Credit from '../credit';
 
 function Home() {
-  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-
-  const [loading, setLoading] = useState(true);
-  const [members, setMembers] = useState([]);
-  const [activeCompanyId, setActiveCompanyId] = useState(0);
-  const [error, setError] = useState("");
-  
-  async function runDiscordBot() {
-    const res = await fetch("/api/run_discord_bot", { method: "POST" });
-    if (!res.ok) throw new Error(`api/run_discord_bot failed: ${res.status}`);
-  }
-
-  async function fetchMembersUntilReady({ timeoutMs = 20000, intervalMs = 2000 } = {}) {
-    const start = Date.now();
-
-    while (Date.now() - start < timeoutMs) {
-      const res = await fetch("/api/get_members");
-      if (!res.ok) throw new Error(`api/get_members failed: ${res.status} ${res.error}`);
-      const data = await res.json();
-
-      const arr = Array.isArray(data?.members) ? data.members : [];
-      if (arr.length > 0) return arr;
-
-      await sleep(intervalMs);
-    }
-
-    return []; 
-  }
-
-  async function refresh() {
-    setError("");
-    setLoading(true);
-    try {
-      await runDiscordBot();
-      const arr = await fetchMembersUntilReady();
-      setMembers(arr);
-    } catch (e) {
-      setError(e?.message || "Unknown error");
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  // initial load
-  useEffect(() => {
-    refresh();
-  }, []);
 
   return (
     <Container className='justify-content-center'>
