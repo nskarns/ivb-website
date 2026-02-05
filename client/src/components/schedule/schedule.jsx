@@ -31,12 +31,12 @@ function Schedule() {
   const internalCompanyRanEvent = formatLocalTime(20);
 
   // Friday
-  const boyHowdyCampaignEvent = formatLocalTime(20);
+  const naSkirmishFridayEvent = formatLocalTime(20);
 
   // Saturday
   const asianEvent = formatLocalTime(6, 30);
   const grandCampaignEvent = formatLocalTime(15);
-  const houseDividedCampaign = formatLocalTime(20);
+  const tennesseeRiverCampaign = formatLocalTime(20);
 
   return (
     <Container className='justify-content-center'>
@@ -73,7 +73,7 @@ function Schedule() {
               Friday
             </h2>
             <p className='home-description home-text d-flex flex-column m-0 gap-2'>
-              <span>Boy Howdy Campaign - {boyHowdyCampaignEvent}</span>
+              <span>NA Skirmish Event - {naSkirmishFridayEvent}</span>
             </p>
           </Row>
           <Row>
@@ -83,7 +83,7 @@ function Schedule() {
             <p className='home-description home-text d-flex flex-column m-0 gap-2'>
               <span>Asian/Austrailian Timezone - {asianEvent}</span>
               <span>EU Grand Campaign -  {grandCampaignEvent}</span>
-              <span>House Divided Campaign - {houseDividedCampaign}</span>
+              <span>Tennessee River Campaign - {tennesseeRiverCampaign}</span>
             </p>
           </Row>
         </Col>
