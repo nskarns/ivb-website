@@ -248,7 +248,7 @@ export default function OnlineMembers({ members, membersLoading, membersError })
       ) : membersLoading ? (
         <LoadingState />
       ) : !members.length ? (
-        <p style={{ color: "#E3E3E3" }}>No members online</p>
+        <p className='d-flex justify-content-center fs-3 mb-0' style={{ color: "#E3E3E3" }}>No members online</p>
       ) : (
         <>
           <Col className='d-flex flex-column flex-lg-row justify-content-center gap-2'>
@@ -343,6 +343,7 @@ export default function OnlineMembers({ members, membersLoading, membersError })
                     <div id="discord-bot-output">
                       {officerMembers.length === 0 ? (
                         <div
+                          className='d-flex justify-content-center text-center'
                           style={{
                             textShadow: "0 4px 4px rgba(0,0,0,0.5)",
                             fontSize: "clamp(12px, 1.0vw, 30px)",
@@ -406,6 +407,7 @@ export default function OnlineMembers({ members, membersLoading, membersError })
                     <div id="discord-bot-output">
                       {ncoMembers.length === 0 ? (
                         <div
+                          className='d-flex justify-content-center text-center'
                           style={{
                             textShadow: "0 4px 4px rgba(0,0,0,0.5)",
                             fontSize: "clamp(12px, 1.0vw, 30px)",
@@ -467,6 +469,7 @@ export default function OnlineMembers({ members, membersLoading, membersError })
                 <div id="discord-bot-output">
                   {visibleMembers.length === 0 ? (
                     <div
+                      className='d-flex justify-content-center text-center'
                       style={{
                         textShadow: "0 4px 4px rgba(0,0,0,0.5)",
                         fontSize: "clamp(12px, 1.0vw, 30px)",

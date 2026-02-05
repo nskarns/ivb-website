@@ -4,6 +4,7 @@ import asyncio
 import json
 from flask import Flask, jsonify, send_from_directory, abort
 from flask_cors import CORS
+import time
 
 from server.discord_online import fetch_online_members
 
@@ -30,6 +31,16 @@ def run_discord_refresh():
         print("discord refresh error:", e)
 
 # ---------- API ROUTES ----------
+def safe_refresh():
+    global refresh_running
+    if refresh_running:
+        return
+    refresh_running = True
+    try:
+        run_discord_refresh()
+    finally:
+        refresh_running = False
+
 @app.post("/api/run_discord_bot")
 def run_discord_bot():
     t = threading.Thread(target=run_discord_refresh, daemon=True)
@@ -38,14 +49,14 @@ def run_discord_bot():
 
 @app.get("/api/get_members")
 def get_members():
+    global members_data
+
     with lock:
         data = members_data
 
-    try:
-        json.dumps({"members": data})
-    except TypeError as e:
-        print("json.dumps failed:", e)
-        abort(500)
+    if not data:
+        threading.Thread(target=safe_refresh, daemon=True).start()
+        return jsonify({"status": "loading"}), 202
 
     return jsonify({"members": data}), 200
 

@@ -70,8 +70,8 @@ export default function App() {
           const data = await safeJson(res);
           const list = Array.isArray(data?.members) ? data.members : [];
 
-          if (!cancelled) setMembers([...list]);
-          if (res.ok) {
+          if (res.status === 200 && list.length > 0) {
+            if (!cancelled) setMembers([...list]);
             setMembersLoadedOnce(true);
             break;
           }
