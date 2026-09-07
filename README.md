@@ -40,3 +40,11 @@ This file uses the group's discord server and the token of the Discord Bot withi
 
 ## Useful Commands:
 source env/Scripts/activate - Enter ENV
+
+## Update Static Files:
+After a change is made, run:
+1. cd client
+2. npm i
+3. npm run build
+
+This should update your static files so that if you make any changes to the page, those updates will show.
