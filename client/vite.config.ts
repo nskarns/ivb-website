@@ -8,4 +8,8 @@ export default defineConfig({
       "/api": "http://127.0.0.1:5000",
     },
   },
+  build: {
+    outDir: "../server/static",
+    emptyOutDir: true,
+  },
 });

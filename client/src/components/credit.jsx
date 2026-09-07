@@ -1,7 +1,7 @@
 function Credit() {
   return (
     <p className='home-description home-text pb-2'>
-        @2025 - Irish Volunteer Brigade
+        Credit: Eagle - Discord: @ASGARDIANEAGLE
     </p>
   )
 }
